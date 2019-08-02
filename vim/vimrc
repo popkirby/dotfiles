@@ -1,0 +1,46 @@
+if &compatible
+  set nocompatible
+endif
+
+let g:vimdir = fnamemodify(resolve(expand('<sfile>')), ':h')
+function! s:source_rc(path)
+  execute 'source' . g:vimdir . '/' . a:path
+endfunction
+
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
+let $CACHE=expand('~/.cache/vim-plug')
+
+if has('vim_starting')
+  call s:source_rc('init.vim')
+endif
+
+call s:source_rc('plug.vim')
+
+syntax enable
+filetype plugin indent on
+
+"--------------------------------------------------------------------------------
+" Config
+call s:source_rc('config.vim')
+
+"--------------------------------------------------------------------------------
+" View
+call s:source_rc('view.vim')
+
+"--------------------------------------------------------------------------------
+" Mappings
+call s:source_rc('mappings.vim')
+
+"--------------------------------------------------------------------------------
+" Filetype
+call s:source_rc('filetype.vim')
+
+"--------------------------------------------------------------------------------
+" Plugin config
+call s:source_rc('plugins.vim')
+
+
+set secure
